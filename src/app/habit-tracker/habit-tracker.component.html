@@ -1,1 +1,30 @@
-<p>HabitTracker Component</p>
+<div class="habit-editor">
+    <h1>Habit Editor</h1>
+    <label for="custom-habit">CUSTOM HABIT:</label>
+    <input type="text" id="custom-habit" /><br />
+
+    <label for="habit-hours">HOURS A WEEK:</label>
+    <input type="number" id="habit-hours" /><br />
+
+    <button id="add-habit">ADD HABIT</button>
+    <p>DEFAULT HABITS:</p>
+    <button id="add-habit-sleep">SLEEP</button>
+    <button id="add-habit-exercise">EXERCISE</button>
+    <button id="add-habit-homework">HOMEWORK</button>
+    <p>Current Habits:</p>
+    <div class="error-text" id="errors"></div>
+    <div id="habit-list"></div>
+
+    <h1>Habit Calendar</h1>
+    <div class="tracker-buttons">
+        <button id="first-entry">First Entry</button>
+        <button id="previous-entry">Previous Entry</button>
+        <button id="next-entry">Next Entry</button>
+        <button id="last-entry">Last Entry</button><br />
+        <button id="previous-week">Previous Week</button>
+        <button id="previous-day">Previous Day</button>
+        <input id="calendar" type="date" />
+        <button id="next-day">Next Day</button>
+        <button id="next-week">Next Week</button>
+    </div>
+</div>

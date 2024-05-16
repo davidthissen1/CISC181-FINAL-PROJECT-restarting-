@@ -11,5 +11,8 @@ export class MainComponent extends EzComponent {
     private habitTracker: HabitTrackerComponent;
     constructor() {
         super(html, css);
+
+        this.habitTracker = new HabitTrackerComponent();
+        this.addComponent(this.habitTracker, "habit-tracker");
     }
 }

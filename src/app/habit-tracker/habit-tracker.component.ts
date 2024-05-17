@@ -186,7 +186,6 @@ export class HabitTrackerComponent extends EzComponent {
     @Input("calendar")
     onDateChange(e: ValueEvent) {
         this.date = e.value;
-        this.displayTodaysHabits();
     }
 
     @Click("previous-day")

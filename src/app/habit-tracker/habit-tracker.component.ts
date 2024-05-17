@@ -56,9 +56,8 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
 
-            console.log(this.dayList);
             this.error = "";
-            this.habitList.push(item);
+
             item.removeEvent.subscribe((title: string) => {
                 this.removeHabit(title);
             });
@@ -95,9 +94,8 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
 
-            console.log(this.dayList);
             this.error = "";
-            this.habitList.push(item);
+
             item.removeEvent.subscribe((title: string) => {
                 this.removeHabit(title);
             });
@@ -121,9 +119,8 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
 
-            console.log(this.dayList);
             this.error = "";
-            this.habitList.push(item);
+
             item.removeEvent.subscribe((title: string) => {
                 this.removeHabit(title);
             });
@@ -147,9 +144,8 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
 
-            console.log(this.dayList);
             this.error = "";
-            this.habitList.push(item);
+
             item.removeEvent.subscribe((title: string) => {
                 this.removeHabit(title);
             });

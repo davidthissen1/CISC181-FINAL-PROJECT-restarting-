@@ -5,6 +5,7 @@ import {
     Input,
     ValueEvent,
     Click,
+    Timer,
 } from "@gsilber/webez";
 import html from "./habit-tracker.component.html";
 import css from "./habit-tracker.component.css";
@@ -50,6 +51,9 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitHours,
         );
 
+        let completionItem: HabitCompletionComponent =
+            new HabitCompletionComponent(this.habitTitle, this.habitHours);
+
         let checker: boolean = true;
         for (let i = 0; i < this.habitList.length; i++) {
             if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
@@ -61,9 +65,9 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitList.push(item);
 
             this.addComponent(item, "habit-list");
+            this.addComponent(completionItem, "TodaysHabits");
 
             this.addHabitToDayList();
-            this.displayTodaysHabits();
 
             this.error = "";
 
@@ -83,6 +87,22 @@ export class HabitTrackerComponent extends EzComponent {
                 const removedElements = this.habitList.splice(i, 1);
                 for (let e of removedElements) {
                     this.removeComponent(e);
+                }
+            }
+        }
+
+        for (let i = 0; i < this.dayList.length; i++) {
+            for (let j = 0; j < this.dayList[i].getTodaysHabits().length; j++) {
+                if (
+                    this.dayList[i].getTodaysHabits()[j].getHabitTitle() ==
+                    target
+                ) {
+                    const removedElements = this.dayList[i]
+                        .getTodaysHabits()
+                        .splice(j, 1);
+                    for (let e of removedElements) {
+                        this.removeComponent(e);
+                    }
                 }
             }
         }
@@ -230,7 +250,7 @@ export class HabitTrackerComponent extends EzComponent {
         }
         return tempDay;
     }
-
+    @Timer(10)
     displayTodaysHabits() {
         for (let i = 0; i < this.todaysHabits.length; i++) {
             let habit = this.todaysHabits[i];

@@ -5,6 +5,7 @@ import {
     BindCheckedToBoolean,
     Change,
     ValueEvent,
+    EventSubject,
 } from "@gsilber/webez";
 import html from "./habit-completion.component.html";
 import css from "./habit-completion.component.css";
@@ -18,6 +19,8 @@ export class HabitCompletionComponent extends EzComponent {
 
     @BindCheckedToBoolean("specific-checkbox")
     private completed: boolean;
+    removeEvent: EventSubject<string> = new EventSubject<string>();
+
     constructor(title: string, hours: number) {
         super(html, css);
         this.title = title;

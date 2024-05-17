@@ -15,4 +15,12 @@ export class DayComponent extends EzComponent {
     addHabit(habit: HabitCompletionComponent) {
         this.todaysHabits.push(habit);
     }
+
+    getTodaysHabits() {
+        return this.todaysHabits;
+    }
+
+    getDate() {
+        return this.date;
+    }
 }

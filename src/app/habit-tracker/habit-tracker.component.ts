@@ -176,7 +176,7 @@ export class HabitTrackerComponent extends EzComponent {
         if (!dayChecker) {
             this.dayList.push(temporaryDate);
         }
-        console.log(this.dayList);
+        this.displayTodaysHabits();
     }
 
     @Click("next-day")
@@ -186,6 +186,7 @@ export class HabitTrackerComponent extends EzComponent {
     @Input("calendar")
     onDateChange(e: ValueEvent) {
         this.date = e.value;
+        this.displayTodaysHabits();
     }
 
     @Click("previous-day")
@@ -210,6 +211,19 @@ export class HabitTrackerComponent extends EzComponent {
 
         for (let i = 0; i < this.dayList.length; i++) {
             this.dayList[i].addHabit(newHabit);
+        }
+    }
+
+    displayTodaysHabits() {
+        let myDate = new DayComponent("");
+        for (let i = 0; i < this.dayList.length; i++) {
+            if (this.dayList[i].getDate() == this.date) {
+                myDate = this.dayList[i];
+            }
+        }
+        let todaysHabits = myDate.getTodaysHabits();
+        for (let i = 0; i < todaysHabits.length; i++) {
+            this.addComponent(todaysHabits[i], "todays-habit-completion-list");
         }
     }
 }

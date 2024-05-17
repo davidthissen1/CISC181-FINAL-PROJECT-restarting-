@@ -163,6 +163,18 @@ export class HabitTrackerComponent extends EzComponent {
         let newDate: Date = new Date(this.date);
         newDate.setDate(newDate.getDate() + day);
         this.date = newDate.toISOString().split("T")[0];
+        let dayChecker = false;
+        let temporaryDate = new DayComponent(this.date);
+
+        for (let i = 0; i < this.dayList.length; i++) {
+            if (this.dayList[i] == temporaryDate) {
+                dayChecker = true;
+            }
+        }
+        if (!dayChecker) {
+            this.dayList.push(temporaryDate);
+        }
+        console.log(this.dayList);
     }
 
     @Click("next-day")

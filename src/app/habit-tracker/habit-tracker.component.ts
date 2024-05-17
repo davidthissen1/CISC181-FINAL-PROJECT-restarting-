@@ -10,7 +10,6 @@ import html from "./habit-tracker.component.html";
 import css from "./habit-tracker.component.css";
 import { DayComponent } from "../day/day.component";
 import { HabitComponent } from "../habit/habit.component";
-import { HabitCompletionComponent } from "../habit-completion/habit-completion.component";
 
 export class HabitTrackerComponent extends EzComponent {
     @BindValue("custom-habit")
@@ -78,6 +77,84 @@ export class HabitTrackerComponent extends EzComponent {
                     this.removeComponent(e);
                 }
             }
+        }
+    }
+
+    /* method for adding habits*/
+    @Click("add-habit-sleep")
+    newSleepHabit() {
+        let item: HabitComponent = new HabitComponent("Sleep", 8);
+        let checker: boolean = true;
+        for (let i = 0; i < this.habitList.length; i++) {
+            if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
+                checker = false;
+            }
+        }
+
+        if (checker) {
+            this.habitList.push(item);
+            this.addComponent(item, "habit-list");
+
+            console.log(this.dayList);
+            this.error = "";
+            this.habitList.push(item);
+            item.removeEvent.subscribe((title: string) => {
+                this.removeHabit(title);
+            });
+        } else {
+            this.error = "DUPLICATE HABIT: TRY AGAIN";
+        }
+    }
+
+    /* method for adding habits*/
+    @Click("add-habit-exercise")
+    newExerciseHabit() {
+        let item: HabitComponent = new HabitComponent("Exercise", 10);
+        let checker: boolean = true;
+        for (let i = 0; i < this.habitList.length; i++) {
+            if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
+                checker = false;
+            }
+        }
+
+        if (checker) {
+            this.habitList.push(item);
+            this.addComponent(item, "habit-list");
+
+            console.log(this.dayList);
+            this.error = "";
+            this.habitList.push(item);
+            item.removeEvent.subscribe((title: string) => {
+                this.removeHabit(title);
+            });
+        } else {
+            this.error = "DUPLICATE HABIT: TRY AGAIN";
+        }
+    }
+
+    /* method for adding habits*/
+    @Click("add-habit-homework")
+    newHomeworkHabit() {
+        let item: HabitComponent = new HabitComponent("Homework", 15);
+        let checker: boolean = true;
+        for (let i = 0; i < this.habitList.length; i++) {
+            if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
+                checker = false;
+            }
+        }
+
+        if (checker) {
+            this.habitList.push(item);
+            this.addComponent(item, "habit-list");
+
+            console.log(this.dayList);
+            this.error = "";
+            this.habitList.push(item);
+            item.removeEvent.subscribe((title: string) => {
+                this.removeHabit(title);
+            });
+        } else {
+            this.error = "DUPLICATE HABIT: TRY AGAIN";
         }
     }
 

@@ -46,6 +46,7 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitTitle,
             this.habitHours,
         );
+
         let checker: boolean = true;
         for (let i = 0; i < this.habitList.length; i++) {
             if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
@@ -55,8 +56,11 @@ export class HabitTrackerComponent extends EzComponent {
 
         if (checker) {
             this.habitList.push(item);
+
             this.addComponent(item, "habit-list");
+
             this.addHabitToDayList();
+            this.displayTodaysHabits();
 
             this.error = "";
 
@@ -176,7 +180,6 @@ export class HabitTrackerComponent extends EzComponent {
         if (!dayChecker) {
             this.dayList.push(temporaryDate);
         }
-        this.displayTodaysHabits();
     }
 
     @Click("next-day")
@@ -213,16 +216,20 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    displayTodaysHabits() {
-        let myDate = new DayComponent("");
+    findTodaysDateInDayList() {
+        let tempDay = new DayComponent("");
         for (let i = 0; i < this.dayList.length; i++) {
-            if (this.dayList[i].getDate() == this.date) {
-                myDate = this.dayList[i];
+            let currentdate = this.dayList[i].getDate();
+            if (currentdate == this.date) {
+                tempDay = this.dayList[i];
             }
         }
-        let todaysHabits = myDate.getTodaysHabits();
-        for (let i = 0; i < todaysHabits.length; i++) {
-            this.addComponent(todaysHabits[i], "todays-habit-completion-list");
-        }
+        return tempDay;
+    }
+
+    displayTodaysHabits() {
+        let currentDate = this.findTodaysDateInDayList();
+
+        this.addComponent(currentDate, "TodaysHabits");
     }
 }

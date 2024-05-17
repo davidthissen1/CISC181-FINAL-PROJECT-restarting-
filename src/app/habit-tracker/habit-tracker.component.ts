@@ -10,6 +10,7 @@ import html from "./habit-tracker.component.html";
 import css from "./habit-tracker.component.css";
 import { DayComponent } from "../day/day.component";
 import { HabitComponent } from "../habit/habit.component";
+import { HabitCompletionComponent } from "../habit-completion/habit-completion.component";
 
 export class HabitTrackerComponent extends EzComponent {
     @BindValue("custom-habit")
@@ -55,6 +56,7 @@ export class HabitTrackerComponent extends EzComponent {
         if (checker) {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
+            this.addHabitToDayList();
 
             this.error = "";
 
@@ -197,5 +199,17 @@ export class HabitTrackerComponent extends EzComponent {
     @Click("next-week")
     OnNextWeekClick() {
         this.changeDate(7);
+    }
+
+    /*MAKE HELPER METHOD TO ADD HABIT-COMPLETION TO DAY*/
+    addHabitToDayList() {
+        let newHabit: HabitCompletionComponent = new HabitCompletionComponent(
+            this.habitTitle,
+            this.habitHours,
+        );
+
+        for (let i = 0; i < this.dayList.length; i++) {
+            this.dayList[i].addHabit(newHabit);
+        }
     }
 }

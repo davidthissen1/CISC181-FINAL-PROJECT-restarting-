@@ -22,6 +22,9 @@ export class HabitTrackerComponent extends EzComponent {
     @BindValue("errors")
     private error: string = "";
 
+    @BindValue("calendar")
+    private date: string = "2024-01-01";
+
     private habitList: HabitComponent[] = [];
     private dayList: DayComponent[] = [];
 
@@ -162,9 +165,6 @@ export class HabitTrackerComponent extends EzComponent {
 
     /* date + tracker code starts here*/
 
-    @BindValue("calendar")
-    private date: string = "2024-01-01";
-
     private changeDate(day: number) {
         let newDate: Date = new Date(this.date);
         newDate.setDate(newDate.getDate() + day);
@@ -216,6 +216,10 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
+    private todaysDate = this.findTodaysDateInDayList();
+
+    private todaysHabits = this.todaysDate.getTodaysHabits();
+
     findTodaysDateInDayList() {
         let tempDay = new DayComponent("");
         for (let i = 0; i < this.dayList.length; i++) {
@@ -228,8 +232,9 @@ export class HabitTrackerComponent extends EzComponent {
     }
 
     displayTodaysHabits() {
-        let currentDate = this.findTodaysDateInDayList();
-
-        this.addComponent(currentDate, "TodaysHabits");
+        for (let i = 0; i < this.todaysHabits.length; i++) {
+            let habit = this.todaysHabits[i];
+            this.addComponent(habit, "TodaysHabits");
+        }
     }
 }

@@ -75,7 +75,7 @@ export class HabitTrackerComponent extends EzComponent {
 
         if (checker) {
             this.habitList.push(item);
-
+            this.graphList.push(GraphItem);
             this.addComponent(item, "habit-list");
             this.addComponent(GraphItem, "graph");
             this.addHabitToDayList();
@@ -138,6 +138,7 @@ export class HabitTrackerComponent extends EzComponent {
 
         if (checker) {
             this.habitList.push(item);
+            this.graphList.push(GraphItem);
             this.addComponent(item, "habit-list");
             this.addComponent(GraphItem, "graph");
 
@@ -171,6 +172,7 @@ export class HabitTrackerComponent extends EzComponent {
 
         if (checker) {
             this.habitList.push(item);
+            this.graphList.push(GraphItem);
             this.addComponent(item, "habit-list");
             this.addComponent(GraphItem, "graph");
             this.error = "";
@@ -204,6 +206,7 @@ export class HabitTrackerComponent extends EzComponent {
 
         if (checker) {
             this.habitList.push(item);
+            this.graphList.push(GraphItem);
             this.addComponent(item, "habit-list");
             this.addComponent(GraphItem, "graph");
 
@@ -240,10 +243,6 @@ export class HabitTrackerComponent extends EzComponent {
         if (!dayChecker) {
             this.dayList.push(temporaryDate);
         }
-
-        console.log(this.dayList);
-        console.log(this.dayList[1].getDate());
-        console.log(this.dayList[1].getTodaysHabits()[0].getHabitTitle());
     }
 
     @Click("next-day")
@@ -255,6 +254,12 @@ export class HabitTrackerComponent extends EzComponent {
                     this.removeComponent(habit);
                 });
             }
+        }
+
+        for (let i = 0; i < this.graphList.length; i++) {
+            this.graphList[i].increaseWidth(
+                this.findTimesCompleted(this.graphList[i].getGraphTitle()) * 10,
+            );
         }
     }
     @Input("calendar")
@@ -331,5 +336,21 @@ export class HabitTrackerComponent extends EzComponent {
             let habit = todaysHabits[i];
             this.addComponent(habit, "TodaysHabits");
         }
+    }
+
+    findTimesCompleted(title: string) {
+        let count = 0;
+        for (let i = 0; i < this.dayList.length; i++) {
+            for (let y = 0; y < this.dayList[i].getTodaysHabits().length; y++) {
+                if (
+                    this.dayList[i].getTodaysHabits()[y].getHabitTitle() ==
+                        title &&
+                    this.dayList[i].getTodaysHabits()[y].getCompletion()
+                ) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }

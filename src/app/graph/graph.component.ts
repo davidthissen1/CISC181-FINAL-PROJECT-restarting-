@@ -21,7 +21,11 @@ export class GraphComponent extends EzComponent {
         this.habit = habit;
     }
 
-    public increaseWidth(inc: number) {
-        this.width += inc;
+    increaseWidth(addWidth: number) {
+        this.width += addWidth;
+    }
+
+    getGraphTitle() {
+        return this.habit;
     }
 }

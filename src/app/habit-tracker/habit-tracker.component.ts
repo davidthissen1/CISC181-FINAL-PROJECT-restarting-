@@ -105,6 +105,15 @@ export class HabitTrackerComponent extends EzComponent {
             }
         }
 
+        for (let i = 0; i < this.graphList.length; i++) {
+            if (this.graphList[i].getGraphTitle() == target) {
+                const removedElements = this.graphList.splice(i, 1);
+                for (let e of removedElements) {
+                    this.removeComponent(e);
+                }
+            }
+        }
+
         for (let i = 0; i < this.dayList.length; i++) {
             for (let j = 0; j < this.dayList[i].getTodaysHabits().length; j++) {
                 if (

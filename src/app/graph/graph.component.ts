@@ -15,8 +15,8 @@ export class GraphComponent extends EzComponent {
     private habit: string;
 
     private timesCompleted: number = 0;
-    private onDelete: EventSubject<string> = new EventSubject<string>();
 
+    removeEvent: EventSubject<string> = new EventSubject<string>();
     constructor(habit: string) {
         super(html, css);
         this.habit = habit;

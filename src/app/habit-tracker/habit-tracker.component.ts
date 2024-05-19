@@ -255,12 +255,6 @@ export class HabitTrackerComponent extends EzComponent {
                 });
             }
         }
-
-        for (let i = 0; i < this.graphList.length; i++) {
-            this.graphList[i].increaseWidth(
-                this.findTimesCompleted(this.graphList[i].getGraphTitle()) * 10,
-            );
-        }
     }
     @Input("calendar")
     onDateChange(e: ValueEvent) {
@@ -338,6 +332,22 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
+    @Timer(1000)
+    displayTodaysGraphs() {
+        for (let i = 0; i < this.graphList.length; i++) {
+            let name = this.graphList[i].getGraphTitle();
+            if (
+                this.graphList[i].getTimesCompleted() !==
+                this.findTimesCompleted(name)
+            ) {
+                this.graphList[i].setTimesCompleted(
+                    this.findTimesCompleted(name),
+                );
+                this.graphList[i].increaseWidth();
+            }
+        }
+    }
+
     findTimesCompleted(title: string) {
         let count = 0;
         for (let i = 0; i < this.dayList.length; i++) {
@@ -352,5 +362,19 @@ export class HabitTrackerComponent extends EzComponent {
             }
         }
         return count;
+    }
+
+    fixWidths() {
+        for (let i = 0; i < this.graphList.length; i++) {
+            let name = this.graphList[i].getGraphTitle();
+            if (
+                this.graphList[i].getTimesCompleted() !==
+                this.findTimesCompleted(name)
+            ) {
+                this.graphList[i].getTimesCompleted() !==
+                    this.findTimesCompleted(name);
+                this.graphList[i].increaseWidth();
+            }
+        }
     }
 }

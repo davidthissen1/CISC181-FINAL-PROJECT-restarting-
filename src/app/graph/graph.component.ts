@@ -14,6 +14,7 @@ export class GraphComponent extends EzComponent {
     @BindValue("name")
     private habit: string;
 
+    private timesCompleted: number = 0;
     private onDelete: EventSubject<string> = new EventSubject<string>();
 
     constructor(habit: string) {
@@ -21,11 +22,26 @@ export class GraphComponent extends EzComponent {
         this.habit = habit;
     }
 
-    increaseWidth(addWidth: number) {
-        this.width += addWidth;
+    increaseWidth() {
+        this.width = this.timesCompleted * 10;
     }
 
     getGraphTitle() {
         return this.habit;
+    }
+
+    getTimesCompleted() {
+        return this.timesCompleted;
+    }
+
+    setTimesCompleted(times: number) {
+        this.timesCompleted = times;
+    }
+
+    addCompletion() {
+        this.timesCompleted++;
+    }
+    removeCompletion() {
+        this.timesCompleted--;
     }
 }

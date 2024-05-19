@@ -10,6 +10,9 @@ import {
 import html from "./habit-completion.component.html";
 import css from "./habit-completion.component.css";
 
+/**
+ * HabitCompletionComponent represents a visual component for displaying the completion status of a specific habit.
+ */
 export class HabitCompletionComponent extends EzComponent {
     @BindValue("specificTitle")
     private title: string;
@@ -30,22 +33,34 @@ export class HabitCompletionComponent extends EzComponent {
         this.completed = false;
     }
 
-    /*method to get habit title*/
+    /**
+     * Retrieves the title of the habit.
+     * @returns The title of the habit.
+     */
     getHabitTitle() {
         return this.title;
     }
 
-    /*method to get habit hours*/
+    /**
+     * Retrieves the number of hours dedicated to the habit.
+     * @returns The number of hours.
+     */
 
     getHabitHours() {
         return this.hours;
     }
-
+    /**
+     * Retrieves the completion status of the habit.
+     * @returns The completion status as a boolean.
+     */
     getCompletion(): boolean {
         return this.completed;
     }
 
-    /*attempting to make checkboxes turn off*/
+    /**
+     * Handles the change event for the checkbox, updating the completion status and times completed.
+     * @param event - The value event triggered by the checkbox change.
+     */
     @Change("specific-checkbox")
     oncheckboxchange(event: ValueEvent) {
         if (event.value === "on") {
@@ -58,18 +73,28 @@ export class HabitCompletionComponent extends EzComponent {
             console.log(this.timesCompleted);
         }
     }
-
+    /**
+     * Marks the habit as completed.
+     */
     habitCompleted() {
         this.completed = true;
     }
+    /**
+     * Marks the habit as not completed.
+     */
     habitUnCompleted() {
         this.completed = false;
     }
-
+    /**
+     * Triggers the remove event for this habit.
+     */
     removeHabit() {
         this.removeEvent.next(this.title);
     }
-
+    /**
+     * Retrieves the number of times the habit has been completed.
+     * @returns The number of times completed.
+     */
     getTimesCompleted() {
         return this.timesCompleted;
     }

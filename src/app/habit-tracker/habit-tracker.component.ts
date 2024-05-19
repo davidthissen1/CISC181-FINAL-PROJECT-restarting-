@@ -276,7 +276,11 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    /* date + tracker code starts here*/
+    /**
+     * Changes the selected date by a specified number of days.
+     * @param day - The number of days to change the date by.
+     * adds the day to the Daylist if it is not a duplicate
+     */
 
     private changeDate(day: number) {
         let newDate: Date = new Date(this.date);
@@ -284,8 +288,6 @@ export class HabitTrackerComponent extends EzComponent {
         this.date = newDate.toISOString().split("T")[0];
         let dayChecker = false;
         let temporaryDate = new DayComponent(this.date, this.habitList);
-
-        console.log(temporaryDate.getDate());
 
         for (let i = 0; i < this.dayList.length; i++) {
             if (this.dayList[i].getDate() == temporaryDate.getDate()) {
@@ -296,7 +298,9 @@ export class HabitTrackerComponent extends EzComponent {
             this.dayList.push(temporaryDate);
         }
     }
-
+    /**changes the day to the next day, removing the current habit completion components
+     * then it displays that days habit completion components
+     */
     @Click("next-day")
     OnNextDayClick() {
         this.changeDate(1);
@@ -312,7 +316,9 @@ export class HabitTrackerComponent extends EzComponent {
     onDateChange(e: ValueEvent) {
         this.date = e.value;
     }
-
+    /**changes the day to the previous day, removing the current habit completion components
+     * then it displays that days habit completion components
+     */
     @Click("previous-day")
     OnPreviousDayClick() {
         this.changeDate(-1);
@@ -324,6 +330,9 @@ export class HabitTrackerComponent extends EzComponent {
             }
         }
     }
+    /**changes the day to that day of the previous week, removing the current habit completion components
+     * then it displays that days habit completion components
+     */
     @Click("previous-week")
     OnPreviousWeekClick() {
         this.changeDate(-7);
@@ -335,6 +344,9 @@ export class HabitTrackerComponent extends EzComponent {
             }
         }
     }
+    /**changes the day to that day of the next week, removing the current habit completion components
+     * then it displays that days habit completion components
+     */
     @Click("next-week")
     OnNextWeekClick() {
         this.changeDate(7);
@@ -347,7 +359,7 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    /*MAKE HELPER METHOD TO ADD HABIT-COMPLETION TO DAY*/
+    /*HELPER METHOD TO ADD HABIT-COMPLETION TO DAYCOMPONENT*/
     addHabitToDayList() {
         let newHabit: HabitCompletionComponent = new HabitCompletionComponent(
             this.habitTitle,
@@ -359,6 +371,7 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
+    /**finds the dayComponent in dayList with the same string as this.date */
     findTodaysDateInDayList() {
         let tempDay = new DayComponent("", this.habitList);
         for (let i = 0; i < this.dayList.length; i++) {
@@ -367,12 +380,14 @@ export class HabitTrackerComponent extends EzComponent {
                 tempDay = this.dayList[i];
             }
         }
-        console.log("today");
-        /*       console.log(tempDay.getDate());
-        console.log(tempDay.getTodaysHabits()[0].getHabitTitle());
-*/
+
         return tempDay;
     }
+
+    /**Every 1000 milliseconds the program checks to see if any new habit completions have been added
+     * If a new habit completion is found, it adds the component
+     * to the screen
+     */
     @Timer(1000)
     displayTodaysHabits() {
         let todaysDate: DayComponent = this.findTodaysDateInDayList();
@@ -384,6 +399,10 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
+    /**every 1000 milliseconds the program checks if
+     * the times completed variable inside of each graph component has
+     * changed, if it has, it updates the graph width
+     */
     @Timer(100)
     displayTodaysGraphs() {
         for (let i = 0; i < this.graphList.length; i++) {
@@ -399,7 +418,7 @@ export class HabitTrackerComponent extends EzComponent {
             }
         }
     }
-
+    /**finds how many times each habit has been completed over the course of the days */
     findTimesCompleted(title: string) {
         let count = 0;
         for (let i = 0; i < this.dayList.length; i++) {
@@ -415,7 +434,7 @@ export class HabitTrackerComponent extends EzComponent {
         }
         return count;
     }
-
+    /**changes the timesCompleted variavle to the proper value */
     fixWidths() {
         for (let i = 0; i < this.graphList.length; i++) {
             let name = this.graphList[i].getGraphTitle();

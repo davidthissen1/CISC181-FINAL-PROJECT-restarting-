@@ -8,6 +8,10 @@ import { HabitTrackerComponent } from "./habit-tracker/habit-tracker.component";
  *
  */
 export class MainComponent extends EzComponent {
+    /**
+     * The HabitTrackerComponent instance.
+     */
+
     private habitTracker: HabitTrackerComponent;
     constructor() {
         super(html, css);

@@ -12,6 +12,7 @@ import css from "./habit-tracker.component.css";
 import { DayComponent } from "../day/day.component";
 import { HabitComponent } from "../habit/habit.component";
 import { HabitCompletionComponent } from "../habit-completion/habit-completion.component";
+import { GraphComponent } from "../graph/graph.component";
 
 export class HabitTrackerComponent extends EzComponent {
     @BindValue("custom-habit")
@@ -28,6 +29,7 @@ export class HabitTrackerComponent extends EzComponent {
 
     private habitList: HabitComponent[] = [];
     private dayList: DayComponent[] = [];
+    private graphList: GraphComponent[] = [];
     private initialDate: string = "";
 
     constructor() {
@@ -62,6 +64,8 @@ export class HabitTrackerComponent extends EzComponent {
         let CompletionItem: HabitCompletionComponent =
             new HabitCompletionComponent(this.habitTitle, this.habitHours);
 
+        let GraphItem: GraphComponent = new GraphComponent(this.habitTitle);
+
         let checker: boolean = true;
         for (let i = 0; i < this.habitList.length; i++) {
             if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
@@ -73,7 +77,7 @@ export class HabitTrackerComponent extends EzComponent {
             this.habitList.push(item);
 
             this.addComponent(item, "habit-list");
-
+            this.addComponent(GraphItem, "graph");
             this.addHabitToDayList();
 
             this.error = "";
@@ -125,7 +129,7 @@ export class HabitTrackerComponent extends EzComponent {
         let CompletionItem: HabitCompletionComponent =
             new HabitCompletionComponent("Sleep", 8);
         let checker: boolean = true;
-
+        let GraphItem: GraphComponent = new GraphComponent("Sleep");
         for (let i = 0; i < this.habitList.length; i++) {
             if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
                 checker = false;
@@ -135,6 +139,7 @@ export class HabitTrackerComponent extends EzComponent {
         if (checker) {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
+            this.addComponent(GraphItem, "graph");
 
             this.error = "";
 
@@ -156,6 +161,7 @@ export class HabitTrackerComponent extends EzComponent {
         let item: HabitComponent = new HabitComponent("Exercise", 10);
         let CompletionItem: HabitCompletionComponent =
             new HabitCompletionComponent("Exercise", 10);
+        let GraphItem: GraphComponent = new GraphComponent("Exercise");
         let checker: boolean = true;
         for (let i = 0; i < this.habitList.length; i++) {
             if (this.habitList[i].getHabitTitle() == item.getHabitTitle()) {
@@ -166,6 +172,7 @@ export class HabitTrackerComponent extends EzComponent {
         if (checker) {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
+            this.addComponent(GraphItem, "graph");
             this.error = "";
 
             item.removeEvent.subscribe((title: string) => {
@@ -186,6 +193,7 @@ export class HabitTrackerComponent extends EzComponent {
         let item: HabitComponent = new HabitComponent("Homework", 15);
         let CompletionItem: HabitCompletionComponent =
             new HabitCompletionComponent("Homework", 15);
+        let GraphItem: GraphComponent = new GraphComponent("Exercise");
         let checker: boolean = true;
 
         for (let i = 0; i < this.habitList.length; i++) {
@@ -197,6 +205,7 @@ export class HabitTrackerComponent extends EzComponent {
         if (checker) {
             this.habitList.push(item);
             this.addComponent(item, "habit-list");
+            this.addComponent(GraphItem, "graph");
 
             this.error = "";
 

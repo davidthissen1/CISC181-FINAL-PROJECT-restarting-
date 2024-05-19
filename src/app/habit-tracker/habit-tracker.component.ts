@@ -195,7 +195,7 @@ export class HabitTrackerComponent extends EzComponent {
         let item: HabitComponent = new HabitComponent("Homework", 15);
         let CompletionItem: HabitCompletionComponent =
             new HabitCompletionComponent("Homework", 15);
-        let GraphItem: GraphComponent = new GraphComponent("Exercise");
+        let GraphItem: GraphComponent = new GraphComponent("Homework");
         let checker: boolean = true;
 
         for (let i = 0; i < this.habitList.length; i++) {
@@ -332,7 +332,7 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    @Timer(1000)
+    @Timer(100)
     displayTodaysGraphs() {
         for (let i = 0; i < this.graphList.length; i++) {
             let name = this.graphList[i].getGraphTitle();

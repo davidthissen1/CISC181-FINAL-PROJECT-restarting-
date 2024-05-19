@@ -12,6 +12,7 @@ import css from "./habit-completion.component.css";
 
 /**
  * HabitCompletionComponent represents a visual component for displaying the completion status of a specific habit.
+ * @extends EzComponent
  */
 export class HabitCompletionComponent extends EzComponent {
     @BindValue("specificTitle")

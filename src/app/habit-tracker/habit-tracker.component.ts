@@ -240,6 +240,13 @@ export class HabitTrackerComponent extends EzComponent {
     @Click("next-day")
     OnNextDayClick() {
         this.changeDate(1);
+        for (let i = 0; i < this.dayList.length; i++) {
+            if (this.dayList[i].getDate() !== this.date) {
+                this.dayList[i].getTodaysHabits().forEach((habit) => {
+                    this.removeComponent(habit);
+                });
+            }
+        }
     }
     @Input("calendar")
     onDateChange(e: ValueEvent) {
@@ -249,14 +256,35 @@ export class HabitTrackerComponent extends EzComponent {
     @Click("previous-day")
     OnPreviousDayClick() {
         this.changeDate(-1);
+        for (let i = 0; i < this.dayList.length; i++) {
+            if (this.dayList[i].getDate() !== this.date) {
+                this.dayList[i].getTodaysHabits().forEach((habit) => {
+                    this.removeComponent(habit);
+                });
+            }
+        }
     }
     @Click("previous-week")
     OnPreviousWeekClick() {
         this.changeDate(-7);
+        for (let i = 0; i < this.dayList.length; i++) {
+            if (this.dayList[i].getDate() !== this.date) {
+                this.dayList[i].getTodaysHabits().forEach((habit) => {
+                    this.removeComponent(habit);
+                });
+            }
+        }
     }
     @Click("next-week")
     OnNextWeekClick() {
         this.changeDate(7);
+        for (let i = 0; i < this.dayList.length; i++) {
+            if (this.dayList[i].getDate() !== this.date) {
+                this.dayList[i].getTodaysHabits().forEach((habit) => {
+                    this.removeComponent(habit);
+                });
+            }
+        }
     }
 
     /*MAKE HELPER METHOD TO ADD HABIT-COMPLETION TO DAY*/
@@ -285,7 +313,7 @@ export class HabitTrackerComponent extends EzComponent {
 */
         return tempDay;
     }
-    @Timer(10)
+    @Timer(1000)
     displayTodaysHabits() {
         let todaysDate: DayComponent = this.findTodaysDateInDayList();
         let todaysHabits: HabitCompletionComponent[] =

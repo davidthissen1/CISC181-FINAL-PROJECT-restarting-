@@ -59,4 +59,8 @@ export class HabitCompletionComponent extends EzComponent {
     habitUnCompleted() {
         this.completed = false;
     }
+
+    removeHabit() {
+        this.removeEvent.next(this.title);
+    }
 }

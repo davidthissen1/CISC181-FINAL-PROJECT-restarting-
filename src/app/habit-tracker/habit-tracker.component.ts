@@ -13,7 +13,10 @@ import { DayComponent } from "../day/day.component";
 import { HabitComponent } from "../habit/habit.component";
 import { HabitCompletionComponent } from "../habit-completion/habit-completion.component";
 import { GraphComponent } from "../graph/graph.component";
-
+/**
+ * HabitTrackerComponent represents a visual component for tracking habits over days, weeks, and displaying progress.
+ * @extends EzComponent
+ */
 export class HabitTrackerComponent extends EzComponent {
     @BindValue("custom-habit")
     private habitTitle: string = "";
@@ -43,18 +46,31 @@ export class HabitTrackerComponent extends EzComponent {
         this.initialDate = initialDay.getDate();
         console.log(this.initialDate);
     }
-
+    /**
+     * Handles changes to the custom habit title input.
+     * @param e - The value event triggered by the input change.
+     */
     @Input("custom-habit")
     onHabitTitleChange(e: ValueEvent) {
         this.habitTitle = e.value;
     }
-
+    /**
+     * Handles changes to the habit hours input.
+     * @param e - The value event triggered by the input change.
+     */
     @Input("habit-hours")
     onHabitHoursChange(e: ValueEvent) {
         this.habitHours = +e.value;
     }
+    /**
+     * Adds a new habit to the tracker.
+     * Adds a new habitcompletion to every day
+     * Adds a new habitGraph to graphList
+     * Subsribes title to remove event
+     * Adds graph and habit components to screen
+     * @throws error if duplicate habit is added
+     */
 
-    /* method for adding habits*/
     @Click("add-habit")
     newHabit() {
         let item: HabitComponent = new HabitComponent(
@@ -93,7 +109,10 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    /*method for removing habits*/
+    /**
+     * Removes a habit from the tracker.
+     * @param target - The title of the habit to be removed.
+     */
 
     removeHabit(target: string) {
         for (let i = 0; i < this.habitList.length; i++) {
@@ -131,7 +150,15 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    /* method for adding habits*/
+    /**
+     * Adds a predefined "Sleep" habit to the tracker.
+     * Adds a new habit to the tracker.
+     * Adds a new habitcompletion to every day
+     * Adds a new habitGraph to graphList
+     * Subsribes title to remove event
+     * Adds graph and habit components to screen
+     * @throws error if duplicate habit is added
+     */
     @Click("add-habit-sleep")
     newSleepHabit() {
         let item: HabitComponent = new HabitComponent("Sleep", 8);
@@ -165,7 +192,15 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    /* method for adding habits*/
+    /**
+     * Adds a predefined "Exercise" habit to the tracker.
+     * Adds a new habit to the tracker.
+     * Adds a new habitcompletion to every day
+     * Adds a new habitGraph to graphList
+     * Subsribes title to remove event
+     * Adds graph and habit components to screen
+     * @throws error if duplicate habit is added
+     */
     @Click("add-habit-exercise")
     newExerciseHabit() {
         let item: HabitComponent = new HabitComponent("Exercise", 10);
@@ -198,7 +233,15 @@ export class HabitTrackerComponent extends EzComponent {
         }
     }
 
-    /* method for adding habits*/
+    /**
+     * Adds a predefined "Homework" habit to the tracker.
+     * Adds a new habit to the tracker.
+     * Adds a new habitcompletion to every day
+     * Adds a new habitGraph to graphList
+     * Subsribes title to remove event
+     * Adds graph and habit components to screen
+     * @throws error if duplicate habit is added
+     */
     @Click("add-habit-homework")
     newHomeworkHabit() {
         let item: HabitComponent = new HabitComponent("Homework", 15);

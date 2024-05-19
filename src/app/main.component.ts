@@ -9,7 +9,7 @@ import { HabitTrackerComponent } from "./habit-tracker/habit-tracker.component";
  */
 export class MainComponent extends EzComponent {
     /**
-     * The HabitTrackerComponent instance.
+     * The HabitTrackerComponent instance
      */
 
     private habitTracker: HabitTrackerComponent;

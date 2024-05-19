@@ -21,6 +21,8 @@ export class HabitCompletionComponent extends EzComponent {
     private completed: boolean;
     removeEvent: EventSubject<string> = new EventSubject<string>();
 
+    private timesCompleted: number = 0;
+
     constructor(title: string, hours: number) {
         super(html, css);
         this.title = title;
@@ -48,8 +50,12 @@ export class HabitCompletionComponent extends EzComponent {
     oncheckboxchange(event: ValueEvent) {
         if (event.value === "on") {
             this.completed = true;
+            this.timesCompleted++;
+            console.log(this.timesCompleted);
         } else {
             this.completed = false;
+            this.timesCompleted--;
+            console.log(this.timesCompleted);
         }
     }
 
@@ -62,5 +68,9 @@ export class HabitCompletionComponent extends EzComponent {
 
     removeHabit() {
         this.removeEvent.next(this.title);
+    }
+
+    getTimesCompleted() {
+        return this.timesCompleted;
     }
 }

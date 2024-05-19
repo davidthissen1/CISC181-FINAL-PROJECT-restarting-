@@ -7,7 +7,10 @@ import {
 } from "@gsilber/webez";
 import html from "./habit.component.html";
 import css from "./habit.component.css";
-
+/**
+ * HabitComponent represents a visual component for displaying a specific habit and its attributes.
+ * @extends EzComponent
+ */
 export class HabitComponent extends EzComponent {
     @BindValue("specificTitle")
     private title: string;
@@ -23,17 +26,25 @@ export class HabitComponent extends EzComponent {
         this.hours = hours;
     }
 
-    /*method to get habit title*/
+    /**
+     * Retrieves the title of the habit.
+     * @returns The title of the habit.
+     */
     getHabitTitle() {
         return this.title;
     }
 
-    /*method to get habit hours*/
+    /**
+     * Retrieves the number of hours dedicated to the habit.
+     * @returns The number of hours.
+     */
 
     getHabitHours() {
         return this.hours;
     }
-
+    /**
+     * Removes the habit and triggers the remove event.
+     */
     @Click("specific-remove")
     removeHabit() {
         this.removeEvent.next(this.title);

@@ -9,7 +9,7 @@ import css from "./graph.component.css";
 
 export class GraphComponent extends EzComponent {
     @BindStyleToNumberAppendPx("bar", "width")
-    private width: number = 10;
+    private width: number = 0;
 
     @BindValue("name")
     private habit: string;
